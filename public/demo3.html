@@ -1,0 +1,195 @@
+<!doctype html>
+
+<html lang="en-US">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TikZJax Font Testing Demo</title>
+    <link rel="icon" href="data:,">
+    <link href="fonts.css" rel="stylesheet">
+    <script src="tikzjax.js" defer></script>
+</head>
+
+<body>
+
+<h1>TikZJax Font Testing</h1>
+<p>Testing various fonts (abc, greek, mathscr, mathfrak) in tikz-cd diagrams.</p>
+
+<div class="example">
+<h2>All Uppercase Latin Letters (A-Z)</h2>
+<script type="text/tikz" data-show-console="true" data-tex-packages='{"tikz-cd":"","amssymb":""}'>
+\begin{tikzcd}
+A \arrow[r] & B \arrow[r] & C \arrow[r] & D \arrow[r] & E \\
+F \arrow[r] & G \arrow[r] & H \arrow[r] & I \arrow[r] & J \\
+K \arrow[r] & L \arrow[r] & M \arrow[r] & N \arrow[r] & O \\
+P \arrow[r] & Q \arrow[r] & R \arrow[r] & S \arrow[r] & T \\
+U \arrow[r] & V \arrow[r] & W \arrow[r] & X \arrow[r] & Y \\
+Z
+\end{tikzcd}
+</script>
+</div>
+
+<div class="example">
+<h2>All Lowercase Latin Letters (a-z)</h2>
+<script type="text/tikz" data-show-console="true" data-tex-packages='{"tikz-cd":"","amssymb":""}'>
+\begin{tikzcd}
+a \arrow[r] & b \arrow[r] & c \arrow[r] & d \arrow[r] & e \\
+f \arrow[r] & g \arrow[r] & h \arrow[r] & i \arrow[r] & j \\
+k \arrow[r] & l \arrow[r] & m \arrow[r] & n \arrow[r] & o \\
+p \arrow[r] & q \arrow[r] & r \arrow[r] & s \arrow[r] & t \\
+u \arrow[r] & v \arrow[r] & w \arrow[r] & x \arrow[r] & y \\
+z
+\end{tikzcd}
+</script>
+</div>
+
+<div class="example">
+<h2>All Lowercase Greek Letters</h2>
+<script type="text/tikz" data-show-console="true" data-tex-packages='{"tikz-cd":"","amssymb":""}'>
+\begin{tikzcd}
+\alpha \arrow[r] & \beta \arrow[r] & \gamma \arrow[r] & \delta \arrow[r] & \epsilon \\
+\varepsilon \arrow[r] & \zeta \arrow[r] & \eta \arrow[r] & \theta \arrow[r] & \vartheta \\
+\iota \arrow[r] & \kappa \arrow[r] & \lambda \arrow[r] & \mu \arrow[r] & \nu \\
+\xi \arrow[r] & o \arrow[r] & \pi \arrow[r] & \varpi \arrow[r] & \rho \\
+\varrho \arrow[r] & \sigma \arrow[r] & \varsigma \arrow[r] & \tau \arrow[r] & \upsilon \\
+\phi \arrow[r] & \varphi \arrow[r] & \chi \arrow[r] & \psi \arrow[r] & \omega
+\end{tikzcd}
+</script>
+</div>
+
+<div class="example">
+<h2>All Uppercase Greek Letters</h2>
+<script type="text/tikz" data-show-console="true" data-tex-packages='{"tikz-cd":"","amssymb":""}'>
+\begin{tikzcd}
+A \arrow[r] & B \arrow[r] & \Gamma \arrow[r] & \Delta \arrow[r] & E \\
+Z \arrow[r] & H \arrow[r] & \Theta \arrow[r] & I \arrow[r] & K \\
+\Lambda \arrow[r] & M \arrow[r] & N \arrow[r] & \Xi \arrow[r] & O \\
+\Pi \arrow[r] & P \arrow[r] & \Sigma \arrow[r] & T \arrow[r] & \Upsilon \\
+\Phi \arrow[r] & X \arrow[r] & \Psi \arrow[r] & \Omega
+\end{tikzcd}
+</script>
+</div>
+
+<div class="example">
+<h2>All Script Uppercase Letters (mathscr A-Y)</h2>
+<p>Z doesnt work i guess, and lowercase is not supported in rsfs generally</p>
+<script type="text/tikz" data-show-console="true" data-tex-packages='{"tikz-cd":"","amssymb":"","amsfonts":"","mathrsfs":""}'>
+\begin{tikzcd}
+\mathscr{A} \arrow[r] & \mathscr{B} \arrow[r] & \mathscr{C} \arrow[r] & \mathscr{D} \arrow[r] & \mathscr{E} \\
+\mathscr{F} \arrow[r] & \mathscr{G} \arrow[r] & \mathscr{H} \arrow[r] & \mathscr{I} \arrow[r] & \mathscr{J} \\
+\mathscr{K} \arrow[r] & \mathscr{L} \arrow[r] & \mathscr{M} \arrow[r] & \mathscr{N} \arrow[r] & \mathscr{O} \\
+\mathscr{P} \arrow[r] & \mathscr{Q} \arrow[r] & \mathscr{R} \arrow[r] & \mathscr{S} \arrow[r] & \mathscr{T} \\
+\mathscr{U} \arrow[r] & \mathscr{V} \arrow[r] & \mathscr{W} \arrow[r] & \mathscr{X} \arrow[r] & \mathscr{Y} \\
+\end{tikzcd}
+</script>
+</div>
+
+<div class="example">
+<h2>All Fraktur Uppercase Letters (mathfrak A-Z)</h2>
+<script type="text/tikz" data-show-console="true" data-tex-packages='{"tikz-cd":"","amssymb":"","amsfonts":"","eufrak":""}'>
+\begin{tikzcd}
+\mathfrak{A} \arrow[r] & \mathfrak{B} \arrow[r] & \mathfrak{C} \arrow[r] & \mathfrak{D} \arrow[r] & \mathfrak{E} \\
+\mathfrak{F} \arrow[r] & \mathfrak{G} \arrow[r] & \mathfrak{H} \arrow[r] & \mathfrak{I} \arrow[r] & \mathfrak{J} \\
+\mathfrak{K} \arrow[r] & \mathfrak{L} \arrow[r] & \mathfrak{M} \arrow[r] & \mathfrak{N} \arrow[r] & \mathfrak{O} \\
+\mathfrak{P} \arrow[r] & \mathfrak{Q} \arrow[r] & \mathfrak{R} \arrow[r] & \mathfrak{S} \arrow[r] & \mathfrak{T} \\
+\mathfrak{U} \arrow[r] & \mathfrak{V} \arrow[r] & \mathfrak{W} \arrow[r] & \mathfrak{X} \arrow[r] & \mathfrak{Y} \\
+\mathfrak{Z}
+\end{tikzcd}
+</script>
+</div>
+
+<div class="example">
+<h2>All Fraktur Lowercase Letters (mathfrak a-z)</h2>
+<script type="text/tikz" data-show-console="true" data-tex-packages='{"tikz-cd":"","amssymb":"","amsfonts":"","eufrak":""}'>
+\begin{tikzcd}
+\mathfrak{a} \arrow[r] & \mathfrak{b} \arrow[r] & \mathfrak{c} \arrow[r] & \mathfrak{d} \arrow[r] & \mathfrak{e} \\
+\mathfrak{f} \arrow[r] & \mathfrak{g} \arrow[r] & \mathfrak{h} \arrow[r] & \mathfrak{i} \arrow[r] & \mathfrak{j} \\
+\mathfrak{k} \arrow[r] & \mathfrak{l} \arrow[r] & \mathfrak{m} \arrow[r] & \mathfrak{n} \arrow[r] & \mathfrak{o} \\
+\mathfrak{p} \arrow[r] & \mathfrak{q} \arrow[r] & \mathfrak{r} \arrow[r] & \mathfrak{s} \arrow[r] & \mathfrak{t} \\
+\mathfrak{u} \arrow[r] & \mathfrak{v} \arrow[r] & \mathfrak{w} \arrow[r] & \mathfrak{x} \arrow[r] & \mathfrak{y} \\
+\mathfrak{z}
+\end{tikzcd}
+</script>
+</div>
+
+<div class="example">
+<h2>Mixed Fonts - Combined</h2>
+<p>Combining different font styles in one diagram.</p>
+<script type="text/tikz" data-show-console="true" data-tex-packages='{"tikz-cd":"","amssymb":"","amsfonts":"","mathrsfs":"","eufrak":""}'>
+\begin{tikzcd}
+\mathscr{F}(\mathfrak{g}) \arrow[r, "\alpha"] \arrow[d, "\pi"'] & \mathscr{G}(\mathfrak{h}) \arrow[d, "\beta"] \\
+A \arrow[r, "\varphi"'] & B
+\end{tikzcd}
+</script>
+</div>
+
+<div class="example">
+<h2>Mixed Fonts - Category Theory</h2>
+<p>Script for categories, regular for objects, Greek for morphisms.</p>
+<script type="text/tikz" data-show-console="true" data-tex-packages='{"tikz-cd":"","amssymb":"","amsfonts":"","mathrsfs":""}'>
+\begin{tikzcd}
+X \arrow[r, "\alpha"] \arrow[d, "\beta"'] & \mathscr{F}(X) \arrow[d, "\mathscr{F}(\beta)"] \\
+Y \arrow[r, "\gamma"'] & \mathscr{F}(Y)
+\end{tikzcd}
+\quad
+\begin{tikzcd}
+\mathscr{A} \arrow[r, bend left, "\mathscr{F}"] \arrow[r, bend right, "\mathscr{G}"'] & \mathscr{B}
+\end{tikzcd}
+</script>
+</div>
+
+<div class="example">
+<h2>Mixed Fonts - Lie Algebras and Ideals</h2>
+<p>Fraktur for Lie algebras and ideals, Greek for homomorphisms.</p>
+<script type="text/tikz" data-show-console="true" data-tex-packages='{"tikz-cd":"","amssymb":"","amsfonts":"","eufrak":""}'>
+\begin{tikzcd}
+\mathfrak{g} \arrow[r, "\varphi"] \arrow[d, "\pi"'] & \mathfrak{h} \\
+\mathfrak{g} / \mathfrak{k} \arrow[ur, dashed, "\tilde{\varphi}"']
+\end{tikzcd}
+\quad
+\begin{tikzcd}
+k \arrow[r, hook] \arrow[d, hook] & K \\
+\mathfrak{p} \arrow[ur, hook]
+\end{tikzcd}
+</script>
+</div>
+
+<div class="example">
+<h2>All Fonts Together</h2>
+<p>Comprehensive test with Latin (abc), Greek, Script, and Fraktur.</p>
+<script type="text/tikz" data-show-console="true" data-tex-packages='{"tikz-cd":"","amssymb":"","amsfonts":"","mathrsfs":"","eufrak":""}'>
+\begin{tikzcd}
+A \arrow[r, "\alpha"] \arrow[d, "\mathscr{F}"'] & \mathfrak{a} \arrow[d, "\beta"] \\
+\mathscr{B} \arrow[r, "\varphi"'] & \mathfrak{g}
+\end{tikzcd}
+\quad
+\begin{tikzcd}
+\mathscr{F}(X) \arrow[r] \arrow[d] & Y \arrow[d] \\
+\mathfrak{k} \arrow[r] & \Lambda
+\end{tikzcd}
+</script>
+</div>
+
+<div class="example">
+<h2>Complex Mixed Diagram</h2>
+<p>Testing all font types in a more complex commutative diagram.</p>
+<script type="text/tikz" data-show-console="true" data-tex-packages='{"tikz-cd":"","amssymb":"","amsfonts":"","mathrsfs":"","eufrak":""}'>
+\begin{tikzcd}[row sep=large, column sep=large]
+\mathscr{F}(\mathfrak{g}) \arrow[r, "\mathscr{F}(\pi)"] \arrow[d, "\eta_{\mathfrak{g}}"'] 
+  & \mathscr{F}(\mathfrak{g}/\mathfrak{h}) \arrow[d, "\eta_{\mathfrak{g}/\mathfrak{h}}"] \\
+\mathscr{G}(\mathfrak{g}) \arrow[r, "\mathscr{G}(\pi)"'] \arrow[ur, dashed, "\exists ! \varphi"] 
+  & \mathscr{G}(\mathfrak{g}/\mathfrak{h})
+\end{tikzcd}
+</script>
+</div>
+
+<script>
+// Example of using the tikzjax-load-finished event
+document.addEventListener('tikzjax-load-finished', function(e) {
+    var svg = e.target;
+    console.log('TikZ font test image loaded:', svg);
+});
+</script>
+
+</body>
+</html>
