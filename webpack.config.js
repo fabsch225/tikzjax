@@ -4,7 +4,7 @@ const CopyPlugin = require('copy-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = (env, argv) => {
-	let config = {
+	let tikzjaxConfig = {
 		mode: "production",
 		devServer: {
             host: '0.0.0.0',  // server bind
