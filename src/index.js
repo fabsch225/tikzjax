@@ -1,6 +1,10 @@
 import { Worker, spawn, Thread } from 'threads';
 import { openDB } from 'idb';
-//import workerCode from './../dist/run-tex-output.js';
+
+let workerCode;
+if (!__IS_DEV__) {
+    workerCode = require('./../dist/run-tex-output.js');
+}
 
 // document.currentScript polyfill
 if (document.currentScript === undefined) {
@@ -200,7 +204,12 @@ const initializeWorker = async () => {
     const urlRoot = url.href.replace(/\/tikzjax\.js(?:\?.*)?$/, '');
 
     // Set up the worker thread.
-    const tex = await spawn(new Worker(`${urlRoot}/run-tex.js`));
+    let tex;
+    if (!__IS_DEV__) {
+        tex = await spawn(getWorkerFromString(workerCode));
+    } else {
+        tex = await spawn(new Worker(`${urlRoot}/run-tex.js`));
+    }
     Thread.events(tex).subscribe((e) => {
         if (e.type == 'message' && typeof e.data === 'string') console.log(e.data);
     });

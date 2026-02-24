@@ -2,6 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const CopyPlugin = require('copy-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
+const { default: plugin } = require('@stylistic/eslint-plugin');
 
 module.exports = (env, argv) => {
 	let tikzjaxConfig = {
@@ -30,6 +31,9 @@ module.exports = (env, argv) => {
 			hints: false
 		},
 		plugins: [
+			new webpack.DefinePlugin({
+                __IS_DEV__: JSON.stringify(false)
+            }),
 			new webpack.ProvidePlugin({
 				process: 'process/browser'
 			})
@@ -65,8 +69,30 @@ module.exports = (env, argv) => {
 			})
 		]
 	};
+
 	let demoConfig = {
 		name: "demo",
+		mode: "production",
+		entry: {
+			tikzjax: './dist/tikzjax.js',
+		},
+		devServer: {
+			host: '0.0.0.0',
+			port: 9091,
+			static: path.join(__dirname, './public'),
+		},
+		plugins: [
+			 new CopyPlugin({
+                patterns: [
+                    { from: './core.dump.gz', to: path.resolve(__dirname, 'dist'), noErrorOnMissing: true },
+                    { from: './tex.wasm.gz', to: path.resolve(__dirname, 'dist'), noErrorOnMissing: true }
+                ]
+            }),
+		]
+	};
+
+	let devConfig = {
+		name: "dev",
 		mode: "development",
 		entry: { tikzjax: './src/index.js', 'run-tex': './src/run-tex.js' },
         output: { path: path.resolve(__dirname, 'dist'), filename: '[name].js' },
@@ -83,6 +109,9 @@ module.exports = (env, argv) => {
         module: { rules: [{ test: /\.css$/, use: ['style-loader', 'css-loader'] }] },
         performance: { hints: false },
         plugins: [
+			new webpack.DefinePlugin({
+                __IS_DEV__: JSON.stringify(true)
+            }),
             new TerserPlugin({ terserOptions: { format: { comments: false } }, extractComments: false }),
             new CopyPlugin({
                 patterns: [
@@ -95,5 +124,5 @@ module.exports = (env, argv) => {
         ]
 	};
 
-	return [demoConfig, runTexConfig, tikzjaxConfig];
+	return [demoConfig, devConfig, runTexConfig, tikzjaxConfig];
 };

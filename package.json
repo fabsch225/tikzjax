@@ -9,11 +9,12 @@
 		"lint:check": "eslint .",
 		"gen-tex-files": "node genTexFiles.js",
 		"encode-tex-files": "node encodeTexFiles.js",
-		"install-fonts": "gulp download-fonts && gulp install-fonts && fontforge -lang=py -script patchFonts.py && node encodeFonts.js",
-		"build": "webpack --mode production",
-		"build:dev": "webpack --mode development",
+		"encode-fonts": "node encodeFonts.js",
+		"build": "webpack --mode production --config-name run-tex --config-name tikzjax",
+		"build:dev": "webpack --config-name dev --mode development",
+		"dev": "webpack serve --config-name dev",
 		"serve": "webpack serve --config-name demo",
-		"postbuild": "node cleanup.js && npm run install-fonts"
+		"postbuild": "node cleanup.js"
 	},
 	"author": "Jim Fowler",
 	"contributors": [
