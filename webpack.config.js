@@ -10,7 +10,15 @@ module.exports = (_env, argv) => {
     const config = {
         entry: { tikzjax: './src/index.js', 'run-tex': './src/run-tex.js' },
         output: { path: path.resolve(__dirname, 'dist'), filename: '[name].js' },
-        devServer: { static: path.join(__dirname, './public'), port: 9090 },
+        devServer: {
+            host: '0.0.0.0',  // server bind
+            port: 9090,
+            static: path.join(__dirname, './public'),
+            client: {
+                webSocketURL: 'ws://localhost:9090/ws'
+            },
+            allowedHosts: 'all'
+        },
         devtool: process.env.NODE_ENV === 'development' ? 'source-map' : false,
         module: { rules: [{ test: /\.css$/, use: ['style-loader', 'css-loader'] }] },
         performance: { hints: false },
