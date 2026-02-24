@@ -220,5 +220,6 @@
     "umsa.fd",
     "umsb.fd",
     "ursfs.fd",
-    "xparse.sty"
+    "xparse.sty",
+    "euler-math.sty"
 ]

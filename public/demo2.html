@@ -19,30 +19,25 @@
 <h2>Diagram with large spaces which doesnt work. Avoid unnecessary spaces in tikz-cd</h2>
 <script type="text/tikz-legacy" data-show-console="true">
 \usepackage{tikz-cd}
-\usepackage{amssymb}
 \begin{document}
-
 \begin{tikzcd}
-G \arrow[rrrd, "f_G"', bend left] \arrow[rd, "i_G"'] &                                          &  &   \\
-& G \times H \arrow[rr, "\exists!\varphi"] &  & A \\
-H \arrow[rrru, "f_H", bend right] \arrow[ru, "i_H"]  &                                         &  &  
+T
+\arrow[drr, bend left, "x"]
+\arrow[ddr, bend right, "y"]
+\arrow[dr, dotted, "{(x,y)}" description] & & \\
+K & X \times_Z Y \arrow[r, "p"] \arrow[d, "q"]
+& X \arrow[d, "f"] \\
+& Y \arrow[r, "g"]
+& Z
 \end{tikzcd}
-
-\end{document}
-</script>
-</div>
-
-<div class="example">
-<h2>Complete Document with Commutative Diagram</h2>
-<script type="text/tikz-legacy" data-show-console="true">
-
-\usepackage{tikz-cd}
-\usepackage{amssymb}
-
-\begin{document}
-\begin{tikzcd}
-G \arrow[r,"\varphi"] \arrow[d,"\pi"'] & G^\prime \\
-G / H \arrow[ur,"\exists ! \tilde \varphi"']
+\quad \quad
+\begin{tikzcd}[row sep=2.5em]
+A' \arrow[rr,"f'"] \arrow[dr,swap,"a"] \arrow[dd,swap,"g'"] &&
+B' \arrow[dd,swap,"h'" near start] \arrow[dr,"b"] \\
+& A \arrow[rr,crossing over,"f" near start] &&
+B \arrow[dd,"h"] \\
+C' \arrow[rr,"k'" near end] \arrow[dr,swap,"c"] && D' \arrow[dr,swap,"d"] \\
+& C \arrow[rr,"k"] \arrow[uu,<-,crossing over,"g" near end]&& D
 \end{tikzcd}
 \end{document}
 </script>
@@ -96,11 +91,19 @@ G / H \arrow[ur,"\exists ! \tilde \varphi"']
 \usepackage{amssymb}
 \usepackage{amsfonts}
 \usepackage{mathrsfs}
+\usepackage{eufrak}
 
 \begin{document}
 \begin{tikzcd}
 \mathscr{F}(X)  \arrow[r, "\mathscr F(\alpha)"] \arrow[d, "\nu_X"] & \mathscr{F}(Y)  \arrow[d, "\nu_Y"] \\
 \mathscr{G}(X) \arrow[r, "\mathscr G(\alpha)"] & \mathscr{G}(Y)
+\end{tikzcd}
+\qquad
+\begin{tikzcd}
+k_1(\alpha_1) \arrow[r, "j", "\sim"'] \arrow[d, no head]
+& k_2(\alpha_2) \arrow[d, no head] \\
+k_1 = J / \mathfrak q \arrow[r, "i", "\sim"']
+& k_2 = I / \mathfrak p
 \end{tikzcd}
 \end{document}
 </script>

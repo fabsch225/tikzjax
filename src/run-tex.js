@@ -29,6 +29,22 @@ const loadDecompress = async (file) => {
     }
 };
 
+const preprocessInput = (tikzSource) => {
+    // Remove non-breaking space characters, otherwise we get errors
+    const remove = "&nbsp;";
+    tikzSource = tikzSource.replaceAll(remove, "");
+
+    let lines = tikzSource.split("\n");
+
+    // Trim whitespace that is inserted when pasting in code, otherwise TikZJax complains
+    lines = lines.map(line => line.trim());
+
+    // Remove empty lines
+    lines = lines.filter(line => line);
+
+    return lines.join("\n");
+};
+
 const processTeX = async (input, dataset) => {
     if (dataset.showConsole) library.setShowConsole();
 
@@ -81,6 +97,9 @@ expose({
         coredump = new Uint8Array(await loadDecompress('core.dump.gz'), 0, library.pages * 65536);
     },
     async texify(input, dataset) {
+        // Preprocess input
+        input = preprocessInput(input);
+        
         // Set up the tex input file.
         const texPackages = dataset.texPackages ? JSON.parse(dataset.texPackages) : {};
 
@@ -97,6 +116,9 @@ expose({
         return await processTeX(input, dataset);
     },
     async texify_legacy(input, dataset) {
+        // Preprocess input
+        input = preprocessInput(input);
+        
         return await processTeX(input, dataset);
     }
 });
