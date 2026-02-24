@@ -4,6 +4,7 @@ import pako from 'pako';
 import { Buffer } from 'buffer';
 import { Writable } from 'stream-browserify';
 import * as library from './library';
+import { texFilesBase64 } from './../tex_files/texFilesBase64';
 
 let coredump;
 let code;

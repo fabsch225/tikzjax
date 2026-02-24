@@ -1,6 +1,6 @@
 import { Worker, spawn, Thread } from 'threads';
 import { openDB } from 'idb';
-import '../css/container.css';
+import workerCode from './../dist/run-tex-output.js';
 
 // document.currentScript polyfill
 if (document.currentScript === undefined) {
@@ -118,6 +118,12 @@ const processTikzScripts = async (scripts) => {
                 }
             }
 
+
+			// Patch: Fixes symbols stored in the SOFT HYPHEN character (e.g. \Omega, \otimes) not being rendered
+			// Replaces soft hyphens with ¬
+			html = html.replaceAll("&#173;", "&#172;");
+	
+
             const svg = document.createRange().createContextualFragment(html).firstChild;
             svg.role = 'img';
 
@@ -170,6 +176,25 @@ const processTikzScripts = async (scripts) => {
     });
     return currentProcessPromise;
 };
+
+function getWorkerFromString(code) {
+	window.URL = window.URL || window.webkitURL;
+
+	// "Server response", used in all examples
+
+	var blob;
+	try {
+		blob = new Blob([code], {type: 'application/javascript'});
+	} catch (e) { // Backwards-compatibility
+		window.BlobBuilder = window.BlobBuilder || window.WebKitBlobBuilder || window.MozBlobBuilder;
+		blob = new BlobBuilder();
+		blob.append(response);
+		blob = blob.getBlob();
+	}
+	var worker = new Worker(URL.createObjectURL(blob)); //, { type: "module" }
+
+	return worker;
+}
 
 const initializeWorker = async () => {
     const urlRoot = url.href.replace(/\/tikzjax\.js(?:\?.*)?$/, '');

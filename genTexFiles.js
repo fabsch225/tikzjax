@@ -26,7 +26,7 @@ if (dockerContainer) {
     console.log('Using local system');
 }
 
-fs.mkdirSync('./dist/tex_files', { recursive: true });
+fs.mkdirSync('./tex_files', { recursive: true });
 
 const processedFiles = [];
 
