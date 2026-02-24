@@ -1,6 +1,6 @@
 import { Worker, spawn, Thread } from 'threads';
 import { openDB } from 'idb';
-import workerCode from './../dist/run-tex-output.js';
+//import workerCode from './../dist/run-tex-output.js';
 
 // document.currentScript polyfill
 if (document.currentScript === undefined) {

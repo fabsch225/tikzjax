@@ -79,7 +79,7 @@ for (const texFile of files) {
     }
 
     processedFiles.push(texFile);
-    fs.writeFileSync('dist/tex_files/' + texFile + '.gz', pako.gzip(fileContent));
+    fs.writeFileSync('tex_files/' + texFile + '.gz', pako.gzip(fileContent));
 }
 
 // Copy additional tex files from additionalTexFiles directory

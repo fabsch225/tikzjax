@@ -3,17 +3,17 @@
 	"version": "1.0.0",
 	"description": "",
 	"scripts": {
-        "format": "prettier --write .",
-        "format:check": "prettier --check .",
-        "lint": "eslint . --fix",
-        "lint:check": "eslint .",
-        "gen-tex-files": "node genTexFiles.js",
+		"format": "prettier --write .",
+		"format:check": "prettier --check .",
+		"lint": "eslint . --fix",
+		"lint:check": "eslint .",
+		"gen-tex-files": "node genTexFiles.js",
 		"encode-tex-files": "node encodeTexFiles.js",
 		"install-fonts": "gulp download-fonts && gulp install-fonts && fontforge -lang=py -script patchFonts.py && node encodeFonts.js",
-        "build": "webpack --mode production",
-        "build:dev": "webpack --mode development",
-        "serve": "webpack serve --mode development",
-        "postbuild": "node cleanup.js && npm run install-fonts"
+		"build": "webpack --mode production",
+		"build:dev": "webpack --mode development",
+		"serve": "webpack serve --config-name demo",
+		"postbuild": "node cleanup.js && npm run install-fonts"
 	},
 	"author": "Jim Fowler",
 	"contributors": [
@@ -21,10 +21,10 @@
 	],
 	"license": "GPL-3.0+",
 	"dependencies": {
+		"@drgrice1/dvi2html": "file:../dvi2html",
 		"buffer": "^6.0.3",
-		"dvi2html": "github:drgrice1/dvi2html#ww-modifications",
 		"fetch-readablestream": "^0.2.0",
-		"localforage": "^1.9.0",
+		"idb": "^8.0.3",
 		"md5": "^2.3.0",
 		"pako": "^2.0.2",
 		"process": "^0.11.10",
@@ -32,14 +32,23 @@
 		"threads": "^1.6.3"
 	},
 	"devDependencies": {
+		"@awmottaz/prettier-plugin-void-html": "^1.6.1",
+		"@stylistic/eslint-plugin": "^2.12.1",
 		"copy-webpack-plugin": "^7.0.0",
 		"css-loader": "^5.0.1",
+		"decompress": "^4.2.1",
+		"eslint": "^9.17.0",
+		"eslint-config-prettier": "^9.1.0",
+		"eslint-webpack-plugin": "^4.2.0",
+		"fonteditor-core": "^2.4.1",
 		"gulp": "^4.0.2",
 		"gulp-decompress": "^3.0.0",
 		"gulp-download2": "^1.0.2",
 		"gulp-filter": "^6.0.0",
-		"style-loader": "^2.0.0",
-		"webpack": "^5.11.1",
-		"webpack-cli": "^4.3.0"
+		"prettier": "^3.4.2",
+		"style-loader": "^4.0.0",
+		"webpack": "^5.97.1",
+		"webpack-cli": "^5.1.4",
+		"webpack-dev-server": "^5.2.0"
 	}
 }
