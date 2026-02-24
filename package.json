@@ -24,11 +24,10 @@
         "install-fonts": "node installFonts.mjs",
         "build": "webpack --mode production",
         "build:dev": "webpack --mode development",
-        "postbuild": "npm run install-fonts && npm run gen-tex-files",
         "serve": "webpack serve --mode development"
     },
     "dependencies": {
-        "@drgrice1/dvi2html": "^0.0.7-beta4",
+        "@drgrice1/dvi2html": "file:../dvi2html",
         "buffer": "^6.0.3",
         "idb": "^8.0.1",
         "pako": "^2.1.0",

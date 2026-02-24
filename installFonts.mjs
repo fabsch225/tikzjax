@@ -32,6 +32,20 @@ https.get('https://us.mirrors.cicku.me/ctan/fonts/cm/ps-type1/bakoma.zip', (resp
                 font.write({ type: 'woff2', hinting: true, kerning: true })
             );
         }
+
+        // Copy additional fonts from additionalFonts directory
+        const additionalFontsDir = path.join(import.meta.dirname, 'additionalFonts');
+        if (fs.existsSync(additionalFontsDir)) {
+            const additionalFiles = fs.readdirSync(additionalFontsDir).filter(f => f.endsWith('.woff2'));
+            for (const file of additionalFiles) {
+                await fs.promises.copyFile(
+                    path.join(additionalFontsDir, file),
+                    path.join(import.meta.dirname, 'dist', 'fonts', file)
+                );
+                console.log(`Copied additional font: ${file}`);
+            }
+        }
+
         fs.rmSync(tmpDir, { recursive: true, force: true });
     });
 });

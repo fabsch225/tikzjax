@@ -23,8 +23,8 @@ module.exports = (_env, argv) => {
                     { from: './tex.wasm.gz', to: path.resolve(__dirname, 'dist'), noErrorOnMissing: true }
                 ]
             }),
-            new webpack.ProvidePlugin({ process: 'process/browser' }),
-            new ESLintPlugin({ configType: 'flat' })
+            new webpack.ProvidePlugin({ process: 'process/browser' })//,
+            //new ESLintPlugin({ configType: 'flat' })
         ]
     };
 

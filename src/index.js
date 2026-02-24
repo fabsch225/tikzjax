@@ -95,7 +95,10 @@ const processTikzScripts = async (scripts) => {
 
             let html = '';
             try {
-                html = await texWorker.texify(text, Object.assign({}, elt.dataset));
+                const isLegacy = elt.type === 'text/tikz-legacy';
+                html = isLegacy 
+                    ? await texWorker.texify_legacy(text, Object.assign({}, elt.dataset))
+                    : await texWorker.texify(text, Object.assign({}, elt.dataset));
             } catch (err) {
                 console.log(err);
                 // Show the browser's image not found icon.
@@ -192,7 +195,7 @@ const initialize = async () => {
     processTikzScripts(
         Array.prototype.slice
             .call(document.getElementsByTagName('script'))
-            .filter((e) => e.getAttribute('type') === 'text/tikz')
+            .filter((e) => e.getAttribute('type') === 'text/tikz' || e.getAttribute('type') === 'text/tikz-legacy')
     );
 
     // If a text/tikz script is added to the page later, then process those.
@@ -200,14 +203,15 @@ const initialize = async () => {
         const newTikzScripts = [];
         for (const mutation of mutationsList) {
             for (const node of mutation.addedNodes) {
-                if (node.tagName && node.tagName.toLowerCase() == 'script' && node.type == 'text/tikz')
+                if (node.tagName && node.tagName.toLowerCase() == 'script' && 
+                    (node.type == 'text/tikz' || node.type == 'text/tikz-legacy'))
                     newTikzScripts.push(node);
                 else if (node.getElementsByTagName)
                     newTikzScripts.push.apply(
                         newTikzScripts,
                         Array.prototype.slice
                             .call(node.getElementsByTagName('script'))
-                            .filter((e) => e.getAttribute('type') === 'text/tikz')
+                            .filter((e) => e.getAttribute('type') === 'text/tikz' || e.getAttribute('type') === 'text/tikz-legacy')
                     );
             }
         }

@@ -558,3 +558,15 @@
     font-family: msbm9;
     src: url('fonts/msbm9.woff2') format('woff2');
 }
+@font-face {
+    font-family: rsfs5;
+    src: url('fonts/rsfs5.woff2') format('woff2');
+}
+@font-face {
+    font-family: rsfs7;
+    src: url('fonts/rsfs7.woff2') format('woff2');
+}
+@font-face {
+    font-family: rsfs10;
+    src: url('fonts/rsfs10.woff2') format('woff2');
+}

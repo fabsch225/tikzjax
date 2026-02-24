@@ -1,0 +1,139 @@
+<!doctype html>
+
+<html lang="en-US">
+ <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>TikZJax Playground</title>
+        <link rel="icon" href="data:,">
+        <link href="fonts.css" rel="stylesheet">
+        <script src="tikzjax.js" defer></script>
+
+    </head>
+
+<body>
+
+<div class="example">
+<h2>tikz-cd (Commutative Diagrams)</h2>
+<script type="text/tikz" data-show-console="true" data-tex-packages='{"amssymb":"","tikz-cd":""}'>
+\begin{tikzcd}
+G \arrow[r,"\varphi"] \arrow[d,"\pi"'] & G^\prime \\
+G / H \arrow[ur,"\exists ! \tilde \varphi"']
+\end{tikzcd}
+</script>
+</div>
+
+<div class="example">
+<h2>pgfplots (3D Surface)</h2>
+<p>Loading the <code>pgfplots</code> package via <code>data-tex-packages</code> attribute.</p>
+<script type="text/tikz" data-show-console="true" data-tex-packages='{"pgfplots":""}' data-add-to-preamble="\pgfplotsset{compat=1.16}" data-aria-label="3D surface plot of exponential function">
+
+\begin{tikzpicture}
+\begin{axis}[colormap/viridis]
+\addplot3[
+surf,
+samples=18,
+domain=-3:3
+]
+{exp(-x^2-y^2)*x};
+\end{axis}
+\end{tikzpicture}
+
+
+</script>
+</div>
+
+<div class="example tikzjax-container">
+<h2>Basic TikZ Picture</h2>
+<p>Using CSS class <code>tikzjax-container</code> for overflow:visible. Simple plot with grid.</p>
+<script type="text/tikz" data-show-console="true" data-aria-label="Mathematical function plots with grid">
+
+  \begin{tikzpicture}[domain=0:4]
+    \draw[very thin,color=gray] (-0.1,-1.1) grid (3.9,3.9);
+    \draw[->] (-0.2,0) -- (4.2,0) node[right] {$x$};
+    \draw[->] (0,-1.2) -- (0,4.2) node[above] {$f(x)$};
+    \draw[color=red]    plot (\x,\x)             node[right] {$f(x) =x$};
+    \draw[color=blue]   plot (\x,{sin(\x r)})    node[right] {$f(x) = \sin x$};
+    \draw[color=orange] plot (\x,{0.05*exp(\x)}) node[right] {$f(x) = \frac{1}{20} \mathrm e^x$};
+  \end{tikzpicture}
+
+</script>
+</div>
+
+<div class="example">
+<h2>More Commutative Diagrams</h2>
+<script type="text/tikz" data-show-console="true" data-tex-packages='{"tikz-cd":"","amssymb":""}'>
+\begin{tikzcd}
+G \arrow[rd, "f_G"', bend left] \arrow[d, "i_G"']  \\
+G \times H \arrow[r, "\exists!\varphi"] & G  \\
+H \arrow[ru, "f_H", bend right] \arrow[u, "i_H"]
+\end{tikzcd}
+</script>
+</div>
+<div class="example">
+<script type="text/tikz" data-show-console="true" data-tex-packages='{"amssymb":"","tikz-cd":""}'>
+\begin{tikzcd}
+G \arrow[rrr, "\varphi", bend left=35] \arrow[r, two heads] & G / \ker \varphi \arrow[r, "\sim", "\bar{\varphi}"']
+& \mathrm{im} \ \varphi
+  \arrow[r, hook]
+& G'
+\end{tikzcd}
+</script>
+</div>
+
+<div class="example">
+<script type="text/tikz" data-show-console="true" data-tex-packages='{"tikz-cd":"","amssymb":"","amsfonts":"", "mathrsfs":""}' data-aria-label="Commutative diagram with fancy script font">
+
+\begin{tikzcd}
+\mathscr{F}(X)  \arrow[r, "\mathscr F(\alpha)"] \arrow[d, "\nu_X"] & \mathscr{F}(Y)  \arrow[d, "\nu_Y"] \\
+\mathscr{G}(X) \arrow[r, "\mathscr G(\alpha)"] & \mathscr{G}(Y)
+\end{tikzcd}
+
+</script>
+</div>
+
+<div class="example">
+<script type="text/tikz" data-show-console="true" data-tex-packages='{"tikz-cd":"","amssymb":"","amsfonts":"", "mathrsfs":""}'>
+\begin{tikzcd}
+0 \arrow[r] 
+  & M_1 \arrow[r] \arrow[d, "\sim"'] 
+  & N \arrow[r] \arrow[d, "\sim"'] 
+  & M_2 \arrow[r] \arrow[d, "\sim"'] 
+  & 0 \\
+0 \arrow[r] 
+  & M_1' \arrow[r] 
+  & M_1' \oplus M_2' \arrow[r] 
+  & M_2' \arrow[r] 
+  & 0
+\end{tikzcd}
+</script>
+</div>
+
+<div class="example">
+<script type="text/tikz" data-show-console="true" data-tex-packages='{"tikz-cd":"","amssymb":"","amsfonts":"", "mathrsfs":""}'>
+\begin{tikzcd}
+k \arrow[r, hook] \arrow[d, hook, "i"'] & K \\
+F \arrow[ur, hook, "j"'] &
+\end{tikzcd}
+</script>
+</div>
+
+<div class="example">
+<script type="text/tikz" data-show-console="true" data-tex-packages='{"tikz-cd":"","amssymb":"","amsfonts":"", "mathrsfs":""}'>
+\begin{tikzcd}
+M \times N \arrow[r, "\varphi"] \arrow[d, "\otimes"'] & P \\
+M \otimes_R N \arrow[ur, "\exists ! \bar \varphi"']
+\end{tikzcd}
+</script>
+</div>
+
+<script>
+// Example of using the tikzjax-load-finished event
+document.addEventListener('tikzjax-load-finished', function(e) {
+	var svg = e.target;
+	console.log('TikZ image loaded:', svg);
+});
+</script>
+
+</body>
+</html>
