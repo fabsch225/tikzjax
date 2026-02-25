@@ -22,7 +22,7 @@
 	],
 	"license": "GPL-3.0+",
 	"dependencies": {
-		"@drgrice1/dvi2html": "file:../dvi2html",
+		"@fabsch225/dvi2html": "github:fabsch225/dvi2html",
 		"buffer": "^6.0.3",
 		"fetch-readablestream": "^0.2.0",
 		"idb": "^8.0.3",
