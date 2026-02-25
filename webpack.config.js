@@ -66,7 +66,10 @@ module.exports = (env, argv) => {
 		plugins: [
 			new webpack.ProvidePlugin({
 				process: 'process/browser'
-			})
+			}),
+			new webpack.DefinePlugin({
+                __IS_DEV__: JSON.stringify(false)
+            })
 		]
 	};
 
@@ -82,13 +85,13 @@ module.exports = (env, argv) => {
 			static: path.join(__dirname, './public'),
 		},
 		plugins: [
-			 new CopyPlugin({
-                patterns: [
-                    { from: './core.dump.gz', to: path.resolve(__dirname, 'dist'), noErrorOnMissing: true },
-                    { from: './tex.wasm.gz', to: path.resolve(__dirname, 'dist'), noErrorOnMissing: true }
-                ]
-            }),
-		]
+			new webpack.DefinePlugin({
+                __IS_DEV__: JSON.stringify(false)
+            })
+		],
+		performance: {
+			hints: false
+		}
 	};
 
 	let devConfig = {

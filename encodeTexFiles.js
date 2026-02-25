@@ -15,7 +15,7 @@ filesDict = Object.fromEntries( files.map( x => [x, x.replace(/[-\.\/]/g, "_")])
 
 // Create list of imports
 const imports = Object.keys(filesDict).reduce(function (previous, key) {
-    return previous + `import ${filesDict[key]} from "./../${key}";\n`;
+    return previous + `import ${filesDict[key]} from "./${key}";\n`;
 }, "");
 
 
@@ -24,4 +24,4 @@ const dict = Object.entries(filesDict).map(([key, value]) => `"${key}":${value}`
 
 const output = imports + "export const texFilesBase64 = {" + dict.join(",") + "}";
 
-fs.writeFileSync('tex_files/texFilesBase64.js', output, {encoding:'utf-8'});
+fs.writeFileSync('./texFilesBase64.js', output, {encoding:'utf-8'});

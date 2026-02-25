@@ -4,29 +4,48 @@ import pako from 'pako';
 import { Buffer } from 'buffer';
 import { Writable } from 'stream-browserify';
 import * as library from './library';
-//import { texFilesBase64 } from './../tex_files/texFilesBase64';
+let texFilesBase64;
+if (!__IS_DEV__) {
+    texFilesBase64 = require('../texFilesBase64').texFilesBase64;
+}
 
 let coredump;
 let code;
 let urlRoot;
 
 const loadDecompress = async (file) => {
-    const response = await fetch(`${urlRoot}/${file}`);
-    if (response.ok) {
-        const reader = response.body.getReader();
-        const inflate = new pako.Inflate();
+    if (__IS_DEV__) {
+        const response = await fetch(`${urlRoot}/${file}`);
+        if (response.ok) {
+            const reader = response.body.getReader();
+            const inflate = new pako.Inflate();
 
-        while (true) {
-            const { done, value } = await reader.read();
-            if (done) break;
-            inflate.push(value);
+            while (true) {
+                const { done, value } = await reader.read();
+                if (done) break;
+                inflate.push(value);
+            }
+            reader.releaseLock();
+            if (inflate.err) throw new Error(inflate.err);
+
+            return inflate.result;
+        } else {
+            throw new Error(`Unable to load ${file}. File not available.`);
         }
-        reader.releaseLock();
-        if (inflate.err) throw new Error(inflate.err);
-
-        return inflate.result;
     } else {
-        throw new Error(`Unable to load ${file}. File not available.`);
+        if (!texFilesBase64[file]) {
+            throw new Error(`Unable to load ${file}. File not available.`);
+        }
+        const prefix = "data:application/gzip;base64,";
+        const gzippedString = texFilesBase64[file];
+        const gzippedBuffer = Buffer.from(gzippedString.substring(prefix.length), 'base64');
+        try {
+            const unzippedBuffer = pako.ungzip(gzippedBuffer);
+            return unzippedBuffer;
+
+        } catch (e) {
+            throw new Error(`Unable to load ${file}.  File corrupted.`);
+        }
     }
 };
 
