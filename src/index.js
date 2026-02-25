@@ -13,7 +13,14 @@ if (document.currentScript === undefined) {
 }
 
 // Determine where this script was loaded from. This is used to find the files to load.
-const url = new URL(document.currentScript.src);
+const getUrlRoot = () => {
+    if (__IS_DEV__) {
+        const url = new URL(document.currentScript.src);
+        return url.href.replace(/\/tikzjax\.js(?:\?.*)?$/, '');
+    } else {
+        return '';
+    }
+}
 
 const dbPromise = openDB('TikzJax', 2, {
     upgrade(db) {
@@ -182,14 +189,13 @@ const processTikzScripts = async (scripts) => {
 };
 
 function getWorkerFromString(code) {
-	window.URL = window.URL || window.webkitURL;
-
 	// "Server response", used in all examples
 
 	var blob;
 	try {
 		blob = new Blob([code], {type: 'application/javascript'});
 	} catch (e) { // Backwards-compatibility
+        window.URL = window.URL || window.webkitURL;
 		window.BlobBuilder = window.BlobBuilder || window.WebKitBlobBuilder || window.MozBlobBuilder;
 		blob = new BlobBuilder();
 		blob.append(response);
@@ -201,7 +207,7 @@ function getWorkerFromString(code) {
 }
 
 const initializeWorker = async () => {
-    const urlRoot = url.href.replace(/\/tikzjax\.js(?:\?.*)?$/, '');
+    const urlRoot = getUrlRoot();
 
     // Set up the worker thread.
     let tex;
